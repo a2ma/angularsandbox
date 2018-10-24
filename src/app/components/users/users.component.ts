@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UserdataService } from '../../services/userdata.service';
 
 import { User } from '../../models/User';
 
@@ -7,72 +8,100 @@ import { User } from '../../models/User';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
-  users: User[];
-  showExtended: boolean = true;
-  loaded: boolean = false;
-  enableAdd: boolean = true;
 
-  constructor() { }
+export class UsersComponent implements OnInit {
+  user: User = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    age: null,
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      zip: null
+    },
+    isActive: false,
+    registered: false,
+    hide: true
+  };
+
+  newUser: User = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    age: null,
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      zip: null
+    },
+    isActive: false,
+    registered: false,
+    hide: true
+  };
+
+  users: User[];
+  // showExtended = true;
+  loaded = false;
+  enableAdd = true;
+  currentClasses = {};
+  currentStyles = {};
+  showUserForm = false;
+  @ViewChild('userForm') form: any;
+
+  constructor(private userData: UserdataService) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.users = [
-        {
-          firstName: "Jane",
-          lastName: "Doe",
-          age: 34,
-          address: {
-            street: '5478 Windham Road',
-            city: 'Stadengrad',
-            state: 'Hibernia',
-            zip: 666666
-          },
-          image: 'http://lorempixel.com/600/600/people/3'
-        },
-        {
-          firstName: "Jane",
-          lastName: "Doe",
-          age: 34,
-          address: {
-            street: '5478 Windham Road',
-            city: 'Stadengrad',
-            state: 'Hibernia',
-            zip: 666666
-          },
-          image: 'http://lorempixel.com/600/600/people/1'
-        },
-        {
-          firstName: "Jane",
-          lastName: "Doe",
-          age: 34,
-          address: {
-            street: '5478 Windham Road',
-            city: 'Stadengrad',
-            state: 'Hibernia',
-            zip: 666666
-          },
-          image: 'http://lorempixel.com/600/600/people/2'
-        },
-        {
-          firstName: "Jane",
-          lastName: "Doe",
-          age: 34,
-          address: {
-            street: '5478 Windham Road',
-            city: 'Stadengrad',
-            state: 'Hibernia',
-            zip: 666666
-          }
-        }
-      ]
 
-      this.loaded = true;
-    }, 2000);
-    
+    this.users = this.userData.getUsers();
+    this.loaded = true;
+
+    this.setCurrentClasses();
+    this.setCurrentStyles();
+
   }
 
-  addUser(user: User) {
-    this.users.push(user);
+  addUser() {
+    this.user.isActive = true;
+    this.user.registered = new Date();
+    this.users.unshift(this.user);
+    this.user = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      age: null,
+      address: {
+        street: '',
+        city: '',
+        state: '',
+        zip: null
+      },
+    };
   }
+
+  setCurrentClasses() {
+    this.currentClasses = {
+      'btn-success': this.enableAdd,
+      'big-text': this.user.hide
+    };
+  }
+  setCurrentStyles() {
+    this.currentStyles = {
+      'padding-top': this.user.hide ? '0' : '40px',
+      'big-text': this.user.hide,
+    };
+    console.log(this.user.hide);
+  }
+
+  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+    if (!valid) {
+    } else {
+      value.registered = new Date();
+      this.userData.addUser(value);
+      this.form.reset();
+    }
+  }
+
 }

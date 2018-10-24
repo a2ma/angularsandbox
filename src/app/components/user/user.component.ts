@@ -8,25 +8,15 @@ import { User } from '../../models/User';
 })
 
 export class UserComponent implements OnInit {
-    //Properties
+    // Properties
     user: User;
 
     constructor() {
 
     }
 
-    ngOnInit(){
-        this.user = {
-            firstName: "Jane",
-            lastName: "Doe",
-            age: 34,
-            address: {
-                street: '5478 Windham Road',
-                city: 'Stadengrad',
-                state: 'Hibernia',
-                zip: 666666
-            }
-        }
+    ngOnInit() {
+
     }
 
 }
