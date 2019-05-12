@@ -85,7 +85,7 @@ export class UserdataService {
   }
 
   getUsers(): Observable<User[]> {
-    return of(this.users);
+    return of(this.users); // returns this as observable
     // console.log('From the service.');
     // return this.users;
   }
