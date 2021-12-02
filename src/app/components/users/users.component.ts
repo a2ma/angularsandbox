@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
     },
     isActive: false,
     registered: false,
-    hide: true
+    hide: false
   };
 
   newUser: User = {
@@ -99,7 +99,6 @@ export class UsersComponent implements OnInit {
       'padding-top': this.user.hide ? '0' : '40px',
       'big-text': this.user.hide,
     };
-    console.log(this.user.hide);
   }
 
   onSubmit({ value, valid }: { value: User, valid: boolean }) {

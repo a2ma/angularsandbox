@@ -29,7 +29,7 @@ export class UserdataService {
         isActive: true,
         balance: 100,
         registered: new Date('01/02/2018 08:30:00'),
-        hide: true
+        hide: false
       },
       {
         firstName: 'Jane',
@@ -46,7 +46,7 @@ export class UserdataService {
         isActive: false,
         balance: 200,
         registered: new Date('03/05/2017 08:30:00'),
-        hide: true
+        hide: false
       },
       {
         firstName: 'Jane',
@@ -62,7 +62,7 @@ export class UserdataService {
         image: 'http://lorempixel.com/600/600/people/2',
         balance: 300,
         registered: new Date('07/14/2016 08:30:00'),
-        hide: true
+        hide: false
       },
       {
         firstName: 'Jane',
@@ -77,7 +77,7 @@ export class UserdataService {
         },
         balance: 100,
         registered: new Date('09/21/2015 08:30:00'),
-        hide: true
+        hide: false
       }
     ];
 
