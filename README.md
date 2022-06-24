@@ -1,6 +1,6 @@
 # Angularsandbox
 
-Created as part of Traversy Media's "Angular Front to Back" course on Udemy.
+Created as part of Traversy Media's "Angular Front to Back" course on Udemy: https://www.udemy.com/course/angular-4-front-to-back
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
 ## Development server
